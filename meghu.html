@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <title>Meghu Holidays</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      background:#f5f7fb;
+      color:#222;
+    }
+
+    /* NAVBAR */
+
+    nav{
+      width:100%;
+      background:#071952;
+      color:white;
+      padding:15px 8%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:fixed;
+      top:0;
+      z-index:1000;
+      box-shadow:0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    nav h2{
+      color:#FFD700;
+    }
+
+    nav ul{
+      display:flex;
+      list-style:none;
+      gap:25px;
+    }
+
+    nav ul li a{
+      color:white;
+      text-decoration:none;
+      transition:0.3s;
+    }
+
+    nav ul li a:hover{
+      color:#FFD700;
+    }
+
+    /* HERO */
+
+    .hero{
+      height:100vh;
+      background:
+      linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+      url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1600&auto=format&fit=crop');
+      background-size:cover;
+      background-position:center;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      color:white;
+      padding:20px;
+    }
+
+    .hero-content h1{
+      font-size:60px;
+      margin-bottom:20px;
+    }
+
+    .hero-content span{
+      color:#FFD700;
+    }
+
+    .hero-content p{
+      font-size:20px;
+      margin-bottom:30px;
+    }
+
+    .btn{
+      padding:12px 30px;
+      background:#FFD700;
+      color:#000;
+      border:none;
+      border-radius:30px;
+      font-weight:600;
+      text-decoration:none;
+      margin:10px;
+      transition:0.3s;
+    }
+
+    .btn:hover{
+      background:white;
+      transform:translateY(-3px);
+    }
+
+    /* SECTION */
+
+    section{
+      padding:90px 8%;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:50px;
+    }
+
+    .section-title h2{
+      font-size:40px;
+      color:#071952;
+      margin-bottom:10px;
+    }
+
+    .section-title p{
+      color:#555;
+    }
+
+    /* ABOUT */
+
+    .about{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:40px;
+      align-items:center;
+    }
+
+    .about img{
+      width:100%;
+      border-radius:20px;
+    }
+
+    .about-text h3{
+      margin-bottom:20px;
+      font-size:30px;
+      color:#071952;
+    }
+
+    .about-text p{
+      line-height:1.8;
+      color:#444;
+    }
+
+    .features{
+      margin-top:20px;
+    }
+
+    .features div{
+      margin:10px 0;
+    }
+
+    /* VEHICLES */
+
+    .vehicle-container{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:30px;
+    }
+
+    .card{
+      background:white;
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 5px 20px rgba(0,0,0,0.1);
+      transition:0.3s;
+    }
+
+    .card:hover{
+      transform:translateY(-10px);
+    }
+
+    .card img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+    }
+
+    .card-content{
+      padding:20px;
+    }
+
+    .card-content h3{
+      color:#071952;
+      margin-bottom:10px;
+    }
+
+    .card-content p{
+      color:#555;
+      margin-bottom:15px;
+      line-height:1.6;
+    }
+
+    /* SERVICES */
+
+    .services{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:25px;
+    }
+
+    .service-box{
+      background:white;
+      padding:30px;
+      text-align:center;
+      border-radius:20px;
+      box-shadow:0 5px 20px rgba(0,0,0,0.08);
+      transition:0.3s;
+    }
+
+    .service-box:hover{
+      background:#071952;
+      color:white;
+      transform:translateY(-10px);
+    }
+
+    .service-box i{
+      font-size:40px;
+      margin-bottom:15px;
+      color:#FFD700;
+    }
+
+    /* GALLERY */
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:15px;
+    }
+
+    .gallery img{
+      width:100%;
+      height:250px;
+      object-fit:cover;
+      border-radius:15px;
+      transition:0.3s;
+    }
+
+    .gallery img:hover{
+      transform:scale(1.05);
+    }
+
+    /* TESTIMONIAL */
+
+    .testimonial-container{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:25px;
+    }
+
+    .testimonial{
+      background:white;
+      padding:30px;
+      border-radius:20px;
+      box-shadow:0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    .testimonial h4{
+      margin-top:15px;
+      color:#071952;
+    }
+
+    /* BOOKING */
+
+    .booking-form{
+      background:white;
+      padding:40px;
+      border-radius:20px;
+      box-shadow:0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    form{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+    }
+
+    input,select,textarea{
+      width:100%;
+      padding:14px;
+      border:1px solid #ccc;
+      border-radius:10px;
+      outline:none;
+    }
+
+    textarea{
+      resize:none;
+      height:120px;
+    }
+
+    /* CONTACT */
+
+    .contact{
+      text-align:center;
+    }
+
+    .contact p{
+      margin:10px 0;
+      font-size:18px;
+    }
+
+    .social-icons{
+      margin-top:20px;
+    }
+
+    .social-icons a{
+      color:#071952;
+      margin:0 10px;
+      font-size:28px;
+      transition:0.3s;
+    }
+
+    .social-icons a:hover{
+      color:#FFD700;
+    }
+
+    /* FOOTER */
+
+    footer{
+      background:#071952;
+      color:white;
+      text-align:center;
+      padding:20px;
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:900px){
+
+      nav ul{
+        display:none;
+      }
+
+      .hero-content h1{
+        font-size:40px;
+      }
+
+      .about{
+        grid-template-columns:1fr;
+      }
+    }
+
+    span{
+        display:flex;
+        align-items:center;
+        align-content:center;
+        color:#FFD700;
+        font-size:24px;
+        gap:10px;
+        img{
+            height:10px;
+            border-radius:0px 0px 0px 0px;
+        }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <nav>
+    <span>    <img src="logo-2 (1).png" alt="Meghu Holidays Logo" style="height:80px;">
+MEGHU HOLIDAYS</span>
+
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#vehicles">Vehicles</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#booking">Booking</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+
+  <section class="hero" id="home">
+
+    <div class="hero-content">
+
+      <h1>Welcome to Meghu Holidays</h1>
+
+      <p>
+       "YOUR DREAM IS OUR DESTINATION"
+      </p>
+
+      <a href="#booking" class="btn">Book Now</a>
+      <a href="#contact" class="btn">Contact Us</a>
+
+    </div>
+
+  </section>
+
+  <!-- ABOUT -->
+
+  <section id="about">
+
+    <div class="section-title">
+      <h2>About Us</h2>
+      <p>Luxury & Comfortable Travel Experience</p>
+    </div>
+
+    <div class="about">
+
+      <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=1200&auto=format&fit=crop">
+
+      <div class="about-text">
+
+        <h3>Why Choose Meghu Holidays?</h3>
+
+        <p>
+          Meghu Holidays provides safe, affordable, and
+          luxury travel services for family trips,
+          corporate travel, airport pickup & drop,
+          temple tours, and tourist packages.
+        </p>
+
+        <div class="features">
+          <div>✔ Experienced Drivers</div>
+          <div>✔ 24/7 Customer Support</div>
+          <div>✔ Clean & Luxury Vehicles</div>
+          <div>✔ Affordable Pricing</div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- VEHICLES -->
+
+  <section id="vehicles">
+
+    <div class="section-title">
+      <h2>Our Vehicles</h2>
+      <p>Choose Your Comfortable Ride</p>
+    </div>
+
+    <div class="vehicle-container">
+
+      <!-- CARD -->
+
+      <div class="card">
+        <img src="urbania.jpeg">
+        <div class="card-content">
+          <h3>Urbania</h3>
+          <p>Luxury AC vehicle with pushback seats perfect for family tours.</p>
+          <a href="#booking" class="btn">Book Now</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="innova.jpeg">
+        <div class="card-content">
+          <h3>Innova Crysta</h3>
+          <p>Premium SUV for comfortable long-distance journeys.</p>
+          <a href="#booking" class="btn">Book Now</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="ethios.jpeg">
+        <div class="card-content">
+          <h3>Etios</h3>
+          <p>Budget-friendly AC sedan ideal for city rides and airport trips.</p>
+          <a href="#booking" class="btn">Book Now</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="tempo.jpeg">
+        <div class="card-content">
+          <h3>Traveller</h3>
+          <p>Spacious group travel vehicle suitable for tours and pilgrimages.</p>
+          <a href="#booking" class="btn">Book Now</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="bus.jpeg">
+
+        <div class="card-content">
+          <h3>Bus</h3>
+          <p>Comfortable bus service for tourist and corporate group travel.</p>
+          <a href="#booking" class="btn">Book Now</a>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- SERVICES -->
+
+  <section id="services">
+
+    <div class="section-title">
+      <h2>Our Services</h2>
+      <p>Premium Travel Services</p>
+    </div>
+
+    <div class="services">
+
+      <div class="service-box">
+        <i class="fa-solid fa-plane"></i>
+        <h3>Airport Pickup</h3>
+      </div>
+
+      <div class="service-box">
+        <i class="fa-solid fa-road"></i>
+        <h3>Outstation Trips</h3>
+      </div>
+
+      <div class="service-box">
+        <i class="fa-solid fa-building"></i>
+        <h3>Corporate Travel</h3>
+      </div>
+
+      <div class="service-box">
+        <i class="fa-solid fa-place-of-worship"></i>
+        <h3>Temple Tours</h3>
+      </div>
+
+      <div class="service-box">
+        <i class="fa-solid fa-people-group"></i>
+        <h3>Family Tours</h3>
+      </div>
+
+      <div class="service-box">
+        <i class="fa-solid fa-heart"></i>
+        <h3>Wedding Travel</h3>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- GALLERY -->
+
+  <section id="gallery">
+
+    <div class="section-title">
+      <h2>Gallery</h2>
+      <p>Travel Memories</p>
+    </div>
+
+    <div class="gallery">
+
+      <img src="urbania.jpeg">
+      <p>Urbania - Premium family tour vehicle: AC comfort, pushback seats, and smooth rides.</p>
+      <img src="inno2.jpeg">
+      <p>Innova Crysta - High-comfort SUV that makes long drives easy and pleasant.</p>
+      <img src="ethios.jpeg">
+      <p>Etios -Affordable air‑conditioned sedan for smooth urban and airport travel.</p>
+      <img src="bus.jpeg">
+      <p>Bus - Well-maintained large capacity bus for smooth group travel on tours and corporate events.</p>
+      <img src="tempo.jpeg">
+      <p>Traveller - Comfort-focused spacious group transport suited for long-distance tours and pilgrimages.</p>
+
+    </div>
+
+  </section>
+
+  <!-- TESTIMONIAL -->
+
+  <section>
+
+    <div class="section-title">
+      <h2>Testimonials</h2>
+      <p>What Our Customers Say</p>
+    </div>
+
+    <div class="testimonial-container">
+
+      <div class="testimonial">
+        <p>
+          “Excellent service and clean vehicles.
+          Highly recommended!”
+        </p>
+        <h4>- Arun Kumar</h4>
+      </div>
+
+      <div class="testimonial">
+        <p>
+          “Comfortable journey and friendly drivers.
+          Great experience.”
+        </p>
+        <h4>- Priya</h4>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- BOOKING -->
+
+  <section id="booking">
+
+    <div class="section-title">
+      <h2>Book Your Ride</h2>
+      <p>Easy & Quick Booking</p>
+    </div>
+
+    <div class="booking-form">
+
+      <form>
+
+        <input type="text" placeholder="Your Name">
+
+        <input type="tel" placeholder="Phone Number">
+
+        <input type="text" placeholder="Pickup Location">
+
+        <input type="text" placeholder="Drop Location">
+
+        <input type="date">
+
+        <select>
+          <option>Select Vehicle</option>
+          <option>Urbania</option>
+          <option>Innova Crysta</option>
+          <option>Etios</option>
+          <option>Traveller</option>
+          <option>Bus</option>
+        </select>
+
+        <input type="number" placeholder="Passengers">
+
+        <textarea placeholder="Message"></textarea>
+
+      </form>
+
+      <br>
+
+      <a href="#" class="btn">Submit Booking</a>
+
+    </div>
+
+  </section>
+
+  <!-- CONTACT -->
+
+  <section id="contact">
+
+    <div class="section-title">
+      <h2>Contact Us</h2>
+      <p>Get In Touch</p>
+      <P> Your Trusted Travel Partner for Comfortable &
+        Memorable Journeys</P>
+
+    </div>
+
+    <div class="contact">
+
+      
+      <p><i class="fa-solid fa-phone"></i> +91 9994936035</p>
+      <p><i class="fa-solid fa-phone"></i> +91 9566611212</p>
+
+      <p><i class="fa-solid fa-envelope"></i> meghuholidays@gmail.com</p>
+
+      <p><i class="fa-solid fa-location-dot"></i> Coimbatore, Tamil Nadu</p>
+
+      <div class="social-icons">
+
+        <a href="https://www.instagram.com/meghuholidays?igsh=cGp5anR3azkyOThu"><i class="fab fa-instagram"></i></a>
+
+        <a href="https://www.facebook.com/share/1EF9kmJN3S/"><i class="fab fa-facebook"></i></a>
+
+        <a href="https://wa.me/message/CXOVCUSXUQZWO1"><i class="fab fa-whatsapp"></i></a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <p>
+      © 2026 Meghu Holidays. All Rights Reserved.
+    </p>
+
+  </footer>
+
+</body>
+</html>
