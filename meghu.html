@@ -65,6 +65,17 @@
       color:#FFD700;
     }
 
+    .nav-toggle{
+      display:none;
+      padding:10px 12px;
+      border:1px solid rgba(255,255,255,0.5);
+      border-radius:8px;
+      background:transparent;
+      color:white;
+      font-size:20px;
+      cursor:pointer;
+    }
+
     /* HERO */
 
     .hero{
@@ -344,8 +355,42 @@
 
     @media(max-width:900px){
 
+      nav{
+        padding:10px 5%;
+      }
+
+      nav > span{
+        font-size:18px;
+      }
+
+      nav > span img{
+        height:60px !important;
+      }
+
+      .nav-toggle{
+        display:block;
+      }
+
       nav ul{
         display:none;
+        position:absolute;
+        top:100%;
+        left:0;
+        right:0;
+        flex-direction:column;
+        gap:0;
+        padding:8px 5% 16px;
+        background:#071952;
+        box-shadow:0 8px 10px rgba(0,0,0,0.2);
+      }
+
+      nav ul.is-open{
+        display:flex;
+      }
+
+      nav ul li a{
+        display:block;
+        padding:10px 0;
       }
 
       .hero-content h1{
@@ -381,15 +426,19 @@
     <span>    <img src="logo-2 (1).png" alt="Meghu Holidays Logo" style="height:80px;">
 MEGHU HOLIDAYS</span>
 
-    <ul>
+    <ul id="site-navigation">
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#vehicles">Vehicles</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
       <li><a href="#booking">Booking</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <button class="nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-navigation">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    </button>
   </nav>
 
   <!-- HERO -->
@@ -584,7 +633,7 @@ MEGHU HOLIDAYS</span>
 
   <!-- TESTIMONIAL -->
 
-  <section>
+  <section id="testimonials">
 
     <div class="section-title">
       <h2>Testimonials</h2>
@@ -624,20 +673,20 @@ MEGHU HOLIDAYS</span>
 
     <div class="booking-form">
 
-      <form>
+      <form id="booking-form">
 
-        <input type="text" placeholder="Your Name">
+        <input type="text" name="name" placeholder="Your Name" aria-label="Your Name" maxlength="100" required>
 
-        <input type="tel" placeholder="Phone Number">
+        <input type="tel" name="phone" placeholder="Phone Number" aria-label="Phone Number" maxlength="20" required>
 
-        <input type="text" placeholder="Pickup Location">
+        <input type="text" name="pickup" placeholder="Pickup Location" aria-label="Pickup Location" maxlength="200" required>
 
-        <input type="text" placeholder="Drop Location">
+        <input type="text" name="dropoff" placeholder="Drop Location" aria-label="Drop Location" maxlength="200" required>
 
-        <input type="date">
+        <input type="date" name="travelDate" aria-label="Travel Date" required>
 
-        <select>
-          <option>Select Vehicle</option>
+        <select name="vehicle" aria-label="Select Vehicle" required>
+          <option value="">Select Vehicle</option>
           <option>Urbania</option>
           <option>Innova Crysta</option>
           <option>Etios</option>
@@ -645,15 +694,16 @@ MEGHU HOLIDAYS</span>
           <option>Bus</option>
         </select>
 
-        <input type="number" placeholder="Passengers">
+        <input type="number" name="passengers" placeholder="Passengers" aria-label="Passengers" min="1" max="100" step="1" required>
 
-        <textarea placeholder="Message"></textarea>
+        <textarea name="message" placeholder="Message" aria-label="Message" maxlength="2000"></textarea>
 
       </form>
 
       <br>
 
-      <a href="#" class="btn">Submit Booking</a>
+      <button type="submit" form="booking-form" class="btn">Submit Booking</button>
+      <p id="booking-status" role="status" aria-live="polite"></p>
 
     </div>
 
@@ -704,6 +754,57 @@ MEGHU HOLIDAYS</span>
     </p>
 
   </footer>
+
+  <script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('nav ul');
+
+    navToggle.addEventListener('click', () => {
+      const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+      navToggle.setAttribute('aria-expanded', String(!isOpen));
+      navToggle.setAttribute('aria-label', isOpen ? 'Open navigation menu' : 'Close navigation menu');
+      navLinks.classList.toggle('is-open', !isOpen);
+    });
+
+    navLinks.addEventListener('click', (event) => {
+      if (event.target.closest('a')) {
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.setAttribute('aria-label', 'Open navigation menu');
+        navLinks.classList.remove('is-open');
+      }
+    });
+
+    const bookingForm = document.querySelector('#booking-form');
+    const bookingStatus = document.querySelector('#booking-status');
+
+    bookingForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const submitButton = document.querySelector('button[form="booking-form"]');
+      submitButton.disabled = true;
+      bookingStatus.textContent = 'Sending your booking request...';
+
+      const formData = new FormData(bookingForm);
+      const booking = Object.fromEntries(formData.entries());
+      booking.passengers = Number(booking.passengers);
+
+      try {
+        const response = await fetch('/api/bookings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(booking)
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Could not submit your booking.');
+
+        bookingStatus.textContent = `Thank you! Your booking request was received (reference #${result.id}).`;
+        bookingForm.reset();
+      } catch (error) {
+        bookingStatus.textContent = error.message || 'Could not connect to the booking service. Please try again.';
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+  </script>
 
 </body>
 </html>
